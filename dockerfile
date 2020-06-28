@@ -2,8 +2,8 @@ FROM debian:wheezy
 
 RUN 
     echo "deb http://ftp.br.debian.org/debian wheezy main" >  /etc/apt/sources.list ; \
-    echo "deb http://ftp.br.debian.org/debian wheezy-updates main" >> /etc/apt/sources.list.d/jessie-backports.list ; \
-    echo "deb http://security.debian.org/ wheezy/updates main" >> /etc/apt/sources.list.d/jessie-backports.list ; \
+    echo "deb http://ftp.br.debian.org/debian wheezy-updates main" >> /etc/apt/sources.list ; \
+    echo "deb http://security.debian.org/ wheezy/updates main" >> /etc/apt/sources.list ; \
     apt-get update ; \
     apt-get upgrade -y ; \
     apt-get install -y apache2 php5 libapache2-mod-php5 ; \
