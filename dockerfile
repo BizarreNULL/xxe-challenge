@@ -1,15 +1,13 @@
-FROM debian:latest
-MAINTAINER Florian Ammon <@riesenwildschaf>
+FROM debian:wheezy
 
+RUN apt-get update ; \
+    apt-get upgrade -y ; \
+    apt-get install -y apache2 php5 libapache2-mod-php5 ; \
+    apt-get systemctl enable apache2 ; \
+    apt-get systemctl start apache2
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y apache2 php5
-
-# Apache config
 COPY apache2/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy website
 RUN rm -rf /var/www/html/* && \
     mkdir /var/www/html/upload/ && \
     chmod 777 /var/www/html/upload/
@@ -17,8 +15,6 @@ RUN rm -rf /var/www/html/* && \
 ADD web/* /var/www/html/
 ADD secret/* /var/www/
 
-# Define default command.
 CMD ["apachectl", "-DFOREGROUND"]
 
-# Expose ports.
 EXPOSE 80
